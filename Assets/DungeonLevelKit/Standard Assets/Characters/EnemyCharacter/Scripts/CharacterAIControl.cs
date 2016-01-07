@@ -12,7 +12,7 @@ namespace UnityStandardAssets.Characters.Enemy
 		public EnemyCharacter character { get; private set; } // the character we are controlling
 		public Transform target; // target to aim for
 		public float closeDistance = 4.6F;
-		bool targetSeen;
+		bool shouldWalk;
 		bool isClose;
 
         // Use this for initialization
@@ -21,8 +21,7 @@ namespace UnityStandardAssets.Characters.Enemy
             // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<NavMeshAgent>();
 			character = GetComponent<EnemyCharacter>();
-			targetSeen = false;
-			isClose = false;
+			shouldWalk = false;
 
 	        agent.updateRotation = true;
 	        agent.updatePosition = true;
@@ -32,15 +31,10 @@ namespace UnityStandardAssets.Characters.Enemy
         // Update is called once per frame
         private void Update()
         {
-            if (target != null && targetSeen)
+            if (target != null && shouldWalk)
             {
-                agent.SetDestination(target.position);
-
-				if (isClose) {
-					character.Move (Vector3.zero, false, false);
-				} else {
-					character.Move (agent.desiredVelocity, false, false);
-				}
+				agent.SetDestination(target.position);
+				character.Move (agent.desiredVelocity, false, false);
             }
             else
             {
@@ -59,16 +53,22 @@ namespace UnityStandardAssets.Characters.Enemy
 		void OnTriggerEnter(Collider collision) 
 		{
 			if (collision.gameObject.name == "ThirdPersonController") {
-				if (!targetSeen)
-					targetSeen = true;
+				Debug.Log ("Collision Enter");
 
 				// Get distance and stop enemy if hero is close
-				Vector3 offset = collision.gameObject.transform.position - transform.position;
-				float distance = offset.sqrMagnitude;
-				if (distance < closeDistance * closeDistance) {
-					print ("The hero is close to me!");	
-					isClose = true;
-					agent.Stop (); // Stop agent's moving
+				float distance = Vector3.Distance(collision.gameObject.transform.position, transform.position);
+
+				Debug.Log (distance);
+				Debug.Log (closeDistance + 1f);
+
+				if (distance > closeDistance + 1f){
+					shouldWalk = true;
+
+				} else {
+					Debug.Log ("The hero is close to me!");	
+					shouldWalk = false;
+					agent.Stop ();
+					character.Fight();
 				}
 			}
 		}
@@ -76,13 +76,19 @@ namespace UnityStandardAssets.Characters.Enemy
 		void OnTriggerExit(Collider collision) 
 		{
 			if (collision.gameObject.name == "ThirdPersonController") {
-				// Get distance and move enemy if hero is close
-				Vector3 offset = collision.gameObject.transform.position - transform.position;
-				float distance = offset.sqrMagnitude;
-				if (distance > closeDistance * closeDistance - 1) {
-					print ("The hero is far from me!");	
-					isClose = false;
-					agent.Resume (); // Resume agent's moving
+				Debug.Log ("Collision Exit");
+
+
+				// Get distance and stop enemy if hero is close
+				float distance = Vector3.Distance(collision.gameObject.transform.position, transform.position);
+
+				Debug.Log (distance);
+				Debug.Log (closeDistance);
+
+				if (distance > closeDistance){
+					shouldWalk = true;
+					Debug.Log ("The hero is far from me!");	
+					agent.Resume ();
 				}
 			}
 		}

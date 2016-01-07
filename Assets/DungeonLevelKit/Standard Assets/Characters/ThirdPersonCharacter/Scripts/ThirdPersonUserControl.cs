@@ -35,10 +35,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
-            if (!m_Jump)
-            {
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
-            }
+			if (!m_Jump)
+			{
+				m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+			}
+
+			// Attack if Left click pressed
+			if (Input.GetMouseButtonDown(0))
+			{
+				m_Character.Attack();
+			}
         }
 
 
@@ -68,7 +74,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 #endif
 
             // pass all parameters to the character control script
-            m_Character.Move(m_Move, crouch, m_Jump);
+			m_Character.Move(m_Move, crouch, m_Jump);
             m_Jump = false;
         }
     }

@@ -21,6 +21,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		bool m_IsGrounded;
 		float m_OrigGroundCheckDistance;
 		const float k_Half = 0.5f;
+		string[] availableAttacks = { "AttackSlice", "AttackStab", "AttackCleave" };
+		string currentAttack = "";
 		float m_TurnAmount;
 		float m_ForwardAmount;
 		Vector3 m_GroundNormal;
@@ -220,6 +222,24 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				m_GroundNormal = Vector3.up;
 				m_Animator.applyRootMotion = false;
 			}
+		}
+
+		public void Attack() {
+			print (currentAttack);
+			if(currentAttack == ""){
+				int randomAttackKey = Random.Range (0, availableAttacks.Length);
+
+				currentAttack = availableAttacks [randomAttackKey];
+
+				m_Animator.SetBool (currentAttack, true);
+
+				Invoke ("AttackEnd", 0.50f);
+			}
+		}
+
+		void AttackEnd (){
+			m_Animator.SetBool (currentAttack, false);
+			currentAttack = "";
 		}
 	}
 }
