@@ -52964,6 +52964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1654589100}
+  closeDistance: 5
 --- !u!114 &2092988141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52983,6 +52984,18 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.1
+--- !u!135 &2092988148
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2092988139}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.6
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2095539456
 Prefab:
   m_ObjectHideFlags: 0

@@ -4,13 +4,16 @@ using UnityEngine;
 namespace UnityStandardAssets.Characters.Enemy
 {
     [RequireComponent(typeof (NavMeshAgent))]
-    [RequireComponent(typeof (EnemyCharacter))]
+	[RequireComponent(typeof (EnemyCharacter))]
+
     public class CharacterAIControl : MonoBehaviour
     {
         public NavMeshAgent agent { get; private set; } // the navmesh agent required for the path finding
 		public EnemyCharacter character { get; private set; } // the character we are controlling
-        public Transform target; // target to aim for
+		public Transform target; // target to aim for
+		public float closeDistance = 4.6F;
 		bool targetSeen;
+		bool isClose;
 
         // Use this for initialization
         private void Start()
@@ -19,8 +22,9 @@ namespace UnityStandardAssets.Characters.Enemy
             agent = GetComponentInChildren<NavMeshAgent>();
 			character = GetComponent<EnemyCharacter>();
 			targetSeen = false;
+			isClose = false;
 
-	        agent.updateRotation = false;
+	        agent.updateRotation = true;
 	        agent.updatePosition = true;
         }
 
@@ -32,10 +36,11 @@ namespace UnityStandardAssets.Characters.Enemy
             {
                 agent.SetDestination(target.position);
 
-				
-				
-                // use the values to move the character
-                character.Move(agent.desiredVelocity, false, false);
+				if (isClose) {
+					character.Move (Vector3.zero, false, false);
+				} else {
+					character.Move (agent.desiredVelocity, false, false);
+				}
             }
             else
             {
@@ -53,8 +58,33 @@ namespace UnityStandardAssets.Characters.Enemy
 
 		void OnTriggerEnter(Collider collision) 
 		{
-			if (collision.gameObject.name == "ThirdPersonController")
-				targetSeen = true;
+			if (collision.gameObject.name == "ThirdPersonController") {
+				if (!targetSeen)
+					targetSeen = true;
+
+				// Get distance and stop enemy if hero is close
+				Vector3 offset = collision.gameObject.transform.position - transform.position;
+				float distance = offset.sqrMagnitude;
+				if (distance < closeDistance * closeDistance) {
+					print ("The other transform is close to me!");	
+					isClose = true;
+					agent.Stop (); // Stop agent's moving
+				}
+			}
+		}
+
+		void OnTriggerExit(Collider collision) 
+		{
+			if (collision.gameObject.name == "ThirdPersonController") {
+				// Get distance and move enemy if hero is close
+				Vector3 offset = collision.gameObject.transform.position - transform.position;
+				float distance = offset.sqrMagnitude;
+				if (distance > closeDistance * closeDistance - 1) {
+					print ("The other transform is far from me!");	
+					isClose = false;
+					agent.Resume (); // Resume agent's moving
+				}
+			}
 		}
     }
 }
