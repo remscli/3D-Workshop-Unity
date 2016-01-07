@@ -373,8 +373,6 @@ GameObject:
   - 54: {fileID: 5444826}
   - 136: {fileID: 13671324}
   - 195: {fileID: 19526928}
-  - 114: {fileID: 11497464}
-  - 114: {fileID: 11489158}
   - 135: {fileID: 13566434}
   m_Layer: 8
   m_Name: AIEnemyController
@@ -1077,7 +1075,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.48203078, y: 2.7500005, z: -62.78}
+  m_LocalPosition: {x: -0.48203078, y: 2.7500005, z: -74.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 432702}
@@ -1433,7 +1431,7 @@ Animator:
   m_GameObject: {fileID: 141508}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 1061988f6e82198489af127b82be075d, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f49260785d21a471cb5d53fd4b46902e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1441,37 +1439,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11489158
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b79b0426f6c4432582c33ace17de606, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
---- !u!114 &11497464
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d4c8dc1cdce4b61aa585cb2ec70876, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MovingTurnSpeed: 360
-  m_StationaryTurnSpeed: 180
-  m_JumpPower: 12
-  m_GravityMultiplier: 2
-  m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 0.3
-  m_AnimSpeedMultiplier: 1
-  m_GroundCheckDistance: 0.1
 --- !u!135 &13566434
 SphereCollider:
   m_ObjectHideFlags: 1
