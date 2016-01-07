@@ -66,7 +66,7 @@ namespace UnityStandardAssets.Characters.Enemy
 				Vector3 offset = collision.gameObject.transform.position - transform.position;
 				float distance = offset.sqrMagnitude;
 				if (distance < closeDistance * closeDistance) {
-					print ("The other transform is close to me!");	
+					print ("The hero is close to me!");	
 					isClose = true;
 					agent.Stop (); // Stop agent's moving
 				}
@@ -80,7 +80,7 @@ namespace UnityStandardAssets.Characters.Enemy
 				Vector3 offset = collision.gameObject.transform.position - transform.position;
 				float distance = offset.sqrMagnitude;
 				if (distance > closeDistance * closeDistance - 1) {
-					print ("The other transform is far from me!");	
+					print ("The hero is far from me!");	
 					isClose = false;
 					agent.Resume (); // Resume agent's moving
 				}
