@@ -31,6 +31,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		Vector3 m_CapsuleCenter;
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
+		float m_Life = 1.0f;
 
 
 		void Start()
@@ -243,6 +244,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Animator.SetBool (currentAttack, false);
 			currentAttack = "";
 			sword.toggleCollider (false);
+		}
+
+		public void Hurt (float damages){
+			m_Life = m_Life - damages;
+			m_Animator.SetFloat("Life", m_Life);
 		}
 	}
 }

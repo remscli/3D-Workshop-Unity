@@ -18,6 +18,8 @@ namespace UnityStandardAssets.Characters.Enemy
 
 		Rigidbody m_Rigidbody;
 		Animator m_Animator;
+		public int projectileSpeed = 1200;
+		public GameObject projectile;
 		bool m_IsGrounded = true;
 		float m_OrigGroundCheckDistance;
 		const float k_Half = 0.5f;
@@ -40,6 +42,8 @@ namespace UnityStandardAssets.Characters.Enemy
 			m_Capsule = GetComponent<CapsuleCollider>();
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
+
+			projectile.SetActive(false);
 
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
@@ -177,8 +181,14 @@ namespace UnityStandardAssets.Characters.Enemy
 			//Debug.Log ("Attack");
 			if(m_Fighting)
 				m_Animator.SetBool("Fight", true);
+				Invoke ("SendAttack", 1.05f);
 				Invoke ("Enraged", 1.10f);
-				//Invoke ("Attack", 4.0f);
+		}
+
+		void SendAttack(){
+			GameObject newProjectile;
+			newProjectile = Instantiate(projectile, projectile.transform.position, projectile.transform.rotation) as GameObject;
+			newProjectile.SetActive(true);
 		}
 
 		void Enraged(){
