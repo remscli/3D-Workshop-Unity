@@ -31,7 +31,7 @@ namespace UnityStandardAssets.Characters.Enemy
         // Update is called once per frame
         private void Update()
         {
-            if (target != null && shouldWalk)
+			if (agent.enabled && target != null && shouldWalk)
             {
 				agent.SetDestination(target.position);
 				character.Move (agent.desiredVelocity, false, false);
@@ -52,7 +52,7 @@ namespace UnityStandardAssets.Characters.Enemy
 
 		void OnTriggerEnter(Collider collision) 
 		{
-			if (collision.gameObject.name == "ThirdPersonController") {
+			if (agent.enabled && collision.gameObject.name == "ThirdPersonController") {
 
 				Debug.Log ("Collision Enter");
 				Debug.Log (isClose);
@@ -80,7 +80,7 @@ namespace UnityStandardAssets.Characters.Enemy
 
 		void OnTriggerExit(Collider collision) 
 		{
-			if (collision.gameObject.name == "ThirdPersonController") {
+			if (agent.enabled && collision.gameObject.name == "ThirdPersonController") {
 				Debug.Log ("Collision Exit");
 				Debug.Log (isClose);
 				// Get distance and make enemy walk if hero is far

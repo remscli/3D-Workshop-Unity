@@ -458,6 +458,8 @@ GameObject:
   - 23: {fileID: 2351166}
   - 95: {fileID: 9574842}
   - 65: {fileID: 6556714}
+  - 54: {fileID: 5497512}
+  - 114: {fileID: 11490008}
   m_Layer: 0
   m_Name: skeleton_archer_arrow
   m_TagString: projectile
@@ -1513,8 +1515,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140432}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.34381, y: 0.835, z: 0.04399872}
+  m_LocalRotation: {x: 0, y: -0.05551999, z: 0, w: 0.9984576}
+  m_LocalPosition: {x: 0.3935806, y: 0.83500004, z: 0.048110962}
   m_LocalScale: {x: 0.6976393, y: 0.69763935, z: 0.69763935}
   m_Children: []
   m_Father: {fileID: 437924}
@@ -1629,10 +1631,25 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!54 &5497512
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140432}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 1
 --- !u!65 &6556714
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1728,7 +1745,21 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.1
+  projectileSpeed: 800
   projectile: {fileID: 140432}
+--- !u!114 &11490008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c37012442936844e3ae243e2b659f892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1200
+  damages: 1
 --- !u!135 &13561880
 SphereCollider:
   m_ObjectHideFlags: 1

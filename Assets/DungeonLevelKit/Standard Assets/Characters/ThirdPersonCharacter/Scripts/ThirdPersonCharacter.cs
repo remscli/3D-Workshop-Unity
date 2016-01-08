@@ -249,6 +249,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		public void Hurt (float damages){
 			m_Life = m_Life - damages;
 			m_Animator.SetFloat("Life", m_Life);
+
+
+			if (m_Life <= 0.0f) {
+				print ("GAME OVER !");
+			}
 		}
 	}
 }

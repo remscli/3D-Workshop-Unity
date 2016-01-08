@@ -53,6 +53,12 @@ namespace UnityStandardAssets.Characters.Enemy
 		public void Move(Vector3 move, bool crouch, bool jump)
 		{
 
+			if(m_Life <= 0.0f){
+				return;
+			}
+
+			print ("move");
+
 			// convert the world relative moveInput vector into a local-relative
 			// turn amount and forward amount required to head in the desired
 			// direction.
@@ -207,6 +213,19 @@ namespace UnityStandardAssets.Characters.Enemy
 		public void Hurt (float damages){
 			m_Life = m_Life - damages;
 			m_Animator.SetFloat("Life", m_Life);
+
+			if (m_Life <= 0.0f) {
+				print ("i'm dead");
+				NavMeshAgent agent = GetComponent<NavMeshAgent>();
+				Debug.Log (agent);
+				agent.enabled = false;
+
+				Invoke ("Destroy", 10.0f);
+			}
+		}
+
+		void Destroy(){
+			Destroy (gameObject);
 		}
 
 		void HandleAirborneMovement()
