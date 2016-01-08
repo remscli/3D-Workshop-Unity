@@ -13,7 +13,7 @@ namespace UnityStandardAssets.Characters.Enemy
 		public Transform target; // target to aim for
 		public float closeDistance = 4.6F;
 		bool shouldWalk;
-		bool isClose;
+		bool isClose = false;
 
         // Use this for initialization
         private void Start()
@@ -36,11 +36,11 @@ namespace UnityStandardAssets.Characters.Enemy
 				agent.SetDestination(target.position);
 				character.Move (agent.desiredVelocity, false, false);
             }
-            else
+            /*else
             {
                 // We still need to call the character's move function, but we send zeroed input as the move param.
                 character.Move(Vector3.zero, false, false);
-            }
+            }*/
 
         }
 
@@ -53,22 +53,27 @@ namespace UnityStandardAssets.Characters.Enemy
 		void OnTriggerEnter(Collider collision) 
 		{
 			if (collision.gameObject.name == "ThirdPersonController") {
+
 				Debug.Log ("Collision Enter");
+				Debug.Log (isClose);
 
 				// Get distance and stop enemy if hero is close
 				float distance = Vector3.Distance(collision.gameObject.transform.position, transform.position);
 
 				Debug.Log (distance);
-				Debug.Log (closeDistance + 1f);
 
-				if (distance > closeDistance + 1f){
+				if (distance > closeDistance && !isClose){
+					Debug.Log ("The hero is far from me!");
+					agent.Resume ();
+					character.StopFight();
 					shouldWalk = true;
 
-				} else {
+				} else if (distance < closeDistance && !isClose){
 					Debug.Log ("The hero is close to me!");	
-					shouldWalk = false;
 					agent.Stop ();
 					character.Fight();
+					shouldWalk = false;
+					isClose = true;
 				}
 			}
 		}
@@ -77,18 +82,18 @@ namespace UnityStandardAssets.Characters.Enemy
 		{
 			if (collision.gameObject.name == "ThirdPersonController") {
 				Debug.Log ("Collision Exit");
-
-
-				// Get distance and stop enemy if hero is close
+				Debug.Log (isClose);
+				// Get distance and make enemy walk if hero is far
 				float distance = Vector3.Distance(collision.gameObject.transform.position, transform.position);
 
 				Debug.Log (distance);
-				Debug.Log (closeDistance);
 
-				if (distance > closeDistance){
-					shouldWalk = true;
-					Debug.Log ("The hero is far from me!");	
+				if (distance > closeDistance && isClose){
+					Debug.Log ("The hero is far from me!");
 					agent.Resume ();
+					character.StopFight();
+					shouldWalk = true;
+					isClose = false;
 				}
 			}
 		}

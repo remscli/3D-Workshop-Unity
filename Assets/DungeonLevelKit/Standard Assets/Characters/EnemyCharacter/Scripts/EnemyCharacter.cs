@@ -18,7 +18,7 @@ namespace UnityStandardAssets.Characters.Enemy
 
 		Rigidbody m_Rigidbody;
 		Animator m_Animator;
-		bool m_IsGrounded;
+		bool m_IsGrounded = true;
 		float m_OrigGroundCheckDistance;
 		const float k_Half = 0.5f;
 		float m_TurnAmount;
@@ -28,9 +28,9 @@ namespace UnityStandardAssets.Characters.Enemy
 		Vector3 m_CapsuleCenter;
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
-		bool m_Life;
+		float m_Life = 1.0f;
 		bool m_Enraged;
-		bool m_Fighting;
+		bool m_Fighting = false;
 
 
 		void Start()
@@ -121,9 +121,7 @@ namespace UnityStandardAssets.Characters.Enemy
 		void UpdateAnimator(Vector3 move)
 		{
 
-			if (m_Fighting) {
-
-				Debug.Log ("passed");
+			//if (!m_Fighting) {
 
 				// update the animator parameters
 				m_Animator.SetFloat ("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
@@ -154,32 +152,51 @@ namespace UnityStandardAssets.Characters.Enemy
 					// don't use that while airborne
 					m_Animator.speed = 1;
 				}
-			}
+			//}
 		}
 
 		public void Fight(){
-			Debug.Log ("Fight");
-			m_Animator.SetFloat ("Forward", 0.0f);
+			//Debug.Log ("Fight");
+			if(!m_Fighting){
+				m_Fighting = true;
+				//Debug.Log ("Fight");
+				m_Animator.SetFloat ("Forward", 0.0f);
 
-			Attack ();
-			//InvokeRepeating ("Fight", 0f, 3.0f);
+				Attack ();
+				//InvokeRepeating ("Attack", 0f, 6.0f);
+			}
+		}
+
+		public void StopFight(){
+			m_Fighting = false;
+			m_Animator.SetBool("Enraged", false);
+			m_Animator.SetBool("Fight", false);
 		}
 
 		void Attack (){
-			Debug.Log ("Attack");
-			m_Animator.SetBool("Fight", true);
-			Invoke ("Enraged", 1.17f);
+			//Debug.Log ("Attack");
+			if(m_Fighting)
+				m_Animator.SetBool("Fight", true);
+				Invoke ("Enraged", 1.10f);
+				//Invoke ("Attack", 4.0f);
 		}
 
 		void Enraged(){
-			Debug.Log ("Enraged");
+			//Debug.Log ("Enraged");
 			m_Animator.SetBool("Enraged", true);
 			m_Animator.SetBool ("Fight", false);
+
+			Invoke ("EndEnraged", 2.10f);
+		}
+			
+		void EndEnraged (){
+			//Debug.Log ("EndEnraged");
+			m_Animator.SetBool ("Enraged", false);
 		}
 
-		void EndAttack (){
-			Debug.Log ("EndAttack");
-			m_Animator.SetBool("Enraged", true);
+		public void Hurt (float damages){
+			m_Life = m_Life - damages;
+			m_Animator.SetFloat("Life", m_Life);
 		}
 
 		void HandleAirborneMovement()

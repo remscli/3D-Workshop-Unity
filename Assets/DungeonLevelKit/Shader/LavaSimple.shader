@@ -162,7 +162,7 @@ Shader "Custom/LavaSimple" {
             float VdotH = max(0.0,dot( viewDirection, halfDirection ));
             float visTerm = SmithBeckmannVisibilityTerm( NdotL, NdotV, 1.0-gloss );
             float normTerm = max(0.0, NDFBlinnPhongNormalizedTerm(NdotH, RoughnessToSpecPower(1.0-gloss)));
-            float specularPBL = max(0, (NdotL*visTerm*normTerm) * unity_LightGammaCorrectionConsts_PIDiv4 );
+            float specularPBL = max(0, (NdotL*visTerm*normTerm) * UNITY_PI/4.0 );
             float3 directSpecular = 1 * pow(max(0,dot(halfDirection,normalDirection)),specPow)*specularPBL*lightColor*FresnelTerm(specularColor, LdotH);
             float3 specular = directSpecular;
 /// Diffuse:

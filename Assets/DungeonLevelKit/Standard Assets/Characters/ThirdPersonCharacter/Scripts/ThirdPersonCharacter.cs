@@ -18,6 +18,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		Rigidbody m_Rigidbody;
 		Animator m_Animator;
+		public Sword sword;
 		bool m_IsGrounded;
 		float m_OrigGroundCheckDistance;
 		const float k_Half = 0.5f;
@@ -225,7 +226,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		}
 
 		public void Attack() {
-			print (currentAttack);
 			if(currentAttack == ""){
 				int randomAttackKey = Random.Range (0, availableAttacks.Length);
 
@@ -233,13 +233,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 				m_Animator.SetBool (currentAttack, true);
 
-				Invoke ("AttackEnd", 0.50f);
+				Invoke ("AttackEnd", 1.0f);
+
+				sword.toggleCollider (true);
 			}
 		}
 
 		void AttackEnd (){
 			m_Animator.SetBool (currentAttack, false);
 			currentAttack = "";
+			sword.toggleCollider (false);
 		}
 	}
 }
