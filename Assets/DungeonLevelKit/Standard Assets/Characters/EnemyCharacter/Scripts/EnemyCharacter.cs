@@ -18,8 +18,8 @@ namespace UnityStandardAssets.Characters.Enemy
 
 		Rigidbody m_Rigidbody;
 		Animator m_Animator;
-		public int projectileSpeed = 1200;
 		public GameObject projectile;
+		public GameObject sword;
 		bool m_IsGrounded = true;
 		float m_OrigGroundCheckDistance;
 		const float k_Half = 0.5f;
@@ -43,7 +43,9 @@ namespace UnityStandardAssets.Characters.Enemy
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
 
-			projectile.SetActive(false);
+			// Hide projectile model by default
+			if(projectile)
+				projectile.SetActive(false);
 
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
@@ -56,8 +58,6 @@ namespace UnityStandardAssets.Characters.Enemy
 			if(m_Life <= 0.0f){
 				return;
 			}
-
-			print ("move");
 
 			// convert the world relative moveInput vector into a local-relative
 			// turn amount and forward amount required to head in the desired
@@ -192,9 +192,13 @@ namespace UnityStandardAssets.Characters.Enemy
 		}
 
 		void SendAttack(){
-			GameObject newProjectile;
-			newProjectile = Instantiate(projectile, projectile.transform.position, projectile.transform.rotation) as GameObject;
-			newProjectile.SetActive(true);
+			if (projectile) {
+				GameObject newProjectile;
+				newProjectile = Instantiate (projectile, projectile.transform.position, projectile.transform.rotation) as GameObject;
+				newProjectile.SetActive (true);
+			} else if(sword){
+
+			}
 		}
 
 		void Enraged(){
