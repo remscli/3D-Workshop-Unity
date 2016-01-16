@@ -3,7 +3,7 @@ using System.Collections;
 using UnityStandardAssets.Characters.Enemy;
 
 namespace UnityStandardAssets.Characters.ThirdPerson {
-	public class Sword : MonoBehaviour {
+	public class ThirdPersonSword : MonoBehaviour {
 
 		EnemyCharacter enemyCharacter;
 		GameObject enemy;
@@ -21,7 +21,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson {
 		void OnTriggerEnter(Collider collision)
 		{
 			//print (collision.gameObject.name);
-			if (collision.gameObject.name == "AIArcherController") {
+			if (collision.gameObject.name == "AIArcherController" 
+				|| collision.gameObject.name == "AIWarriorController") {
 				var hero = transform.root.gameObject;
 				var stateInfo =  hero.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
 

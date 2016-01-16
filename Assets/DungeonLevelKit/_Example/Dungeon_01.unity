@@ -17023,7 +17023,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 496640, guid: 5c741548c7deb48aca323cfcccadd25e, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11475010, guid: 5c741548c7deb48aca323cfcccadd25e, type: 2}
       propertyPath: target
@@ -17093,7 +17093,24 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 24f4093c71a2e4f93b94d2462f1c97ef, type: 2}
-    m_RemovedComponents: []
+    - target: {fileID: 13552664, guid: 5c741548c7deb48aca323cfcccadd25e, type: 2}
+      propertyPath: m_Radius
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 13570176, guid: 5c741548c7deb48aca323cfcccadd25e, type: 2}
+      propertyPath: m_Radius
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 13552664, guid: 5c741548c7deb48aca323cfcccadd25e, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11475010, guid: 5c741548c7deb48aca323cfcccadd25e, type: 2}
+      propertyPath: closeDistance
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 13552664, guid: 5c741548c7deb48aca323cfcccadd25e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5c741548c7deb48aca323cfcccadd25e, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &601411452
@@ -34004,6 +34021,23 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 0be80ae773ecb40a1bca76abc341f5e9, type: 3}
   m_PrefabInternal: {fileID: 1232925716}
+--- !u!1 &1235653771 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 177072, guid: 5c741548c7deb48aca323cfcccadd25e, type: 2}
+  m_PrefabInternal: {fileID: 601361618}
+--- !u!136 &1235653772
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1235653771}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.3
+  m_Height: 4.5524626
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1239182372
 Prefab:
   m_ObjectHideFlags: 0
