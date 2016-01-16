@@ -31,7 +31,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		Vector3 m_CapsuleCenter;
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
-		bool m_Damage;
+		bool m_Hurting = false;
 		float m_Life = 1.0f;
 
 
@@ -134,7 +134,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 			if (!m_IsGrounded)
 			{
-				m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
+				m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y > 0 ? m_Rigidbody.velocity.y : 0);
 			}
 
 			// calculate which leg is behind, so as to leave that leg trailing in the jump animation
@@ -253,25 +253,29 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		}
 
 		public void Hurt (float damages){
-			if (m_Damage)
+			print ("Hurt");
+			print (m_Hurting);
+
+			if (m_Hurting)
 				return;
 			
 			m_Life = m_Life - damages;
 			m_Animator.SetFloat("Life", m_Life);
 
 			if (m_Life > 0.0f) {
-				m_Damage = true;
-				m_Animator.SetBool ("Damage", m_Damage);
+				m_Hurting = true;
+				m_Animator.SetBool ("Hurt", m_Hurting);
 
-				Invoke ("HurtEnd", 0.20f);
+				Invoke ("HurtEnd", 1.40f);
 			} else {
 				print ("GAME OVER !");
 			}
 		}
 
 		void HurtEnd (){
-			m_Damage = false;
-			m_Animator.SetBool ("Damage", m_Damage);
+			print ("hurt end");
+			m_Hurting = false;
+			m_Animator.SetBool ("Hurt", m_Hurting);
 		}
 	}
 }

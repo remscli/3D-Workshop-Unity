@@ -39,8 +39,7 @@ namespace UnityStandardAssets.Characters.Enemy {
 		}
 
 		void HurtThirdPerson(){
-			print ("hero hurted");
-			print (damages);
+			print ("hero hurted ! Damages : " + damages);
 			thirdPersonCharacter = thirdPerson.GetComponent<ThirdPersonCharacter>();
 			thirdPersonCharacter.Hurt(damages);
 		}

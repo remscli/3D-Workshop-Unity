@@ -88,7 +88,7 @@ GameObject:
   - 65: {fileID: 6599322}
   - 137: {fileID: 13719006}
   - 54: {fileID: 5495168}
-  - 114: {fileID: 11423794}
+  - 114: {fileID: 11458904}
   m_Layer: 0
   m_Name: EthanSword
   m_TagString: Untagged
@@ -1438,8 +1438,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140516}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11, y: 2.75, z: -86.68}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
+  m_LocalPosition: {x: -18.09, y: 2.75, z: 45.72}
   m_LocalScale: {x: 1.125, y: 1.125, z: 1.125}
   m_Children:
   - {fileID: 455790}
@@ -1829,7 +1829,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160036}
-  m_LocalRotation: {x: 0.5326752, y: 0.070340455, z: 0.83613276, w: -0.110415146}
+  m_LocalRotation: {x: 0.53267515, y: 0.07034045, z: 0.83613265, w: -0.11041513}
   m_LocalPosition: {x: 0.000022271464, y: -0.00006150465, z: 0.026027026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2530,7 +2530,7 @@ Animator:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140516}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: cf096806450f647f38bde9f54c1f3211, type: 3}
+  m_Avatar: {fileID: 9000000, guid: b235179bd2a63d1468dd430670338c55, type: 3}
   m_Controller: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
@@ -2554,17 +2554,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &11423794
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 103380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e574c691f21d843ee83ea70b6e4cb399, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11425290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2594,6 +2583,17 @@ MonoBehaviour:
   heightDensity: 0.08
   startDistance: 0
   fogShader: {fileID: 4800000, guid: 70d8568987ac0499f952b54c7c13e265, type: 3}
+--- !u!114 &11458904
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbbfdf40cca5b412395288e24b386acd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11484964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2613,7 +2613,7 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
-  sword: {fileID: 11423794}
+  sword: {fileID: 11458904}
 --- !u!124 &12439414
 Behaviour:
   m_ObjectHideFlags: 1

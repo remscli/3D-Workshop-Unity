@@ -66,7 +66,7 @@ namespace UnityStandardAssets.Characters.Enemy
 					Debug.Log ("The hero is far from me!");
 					//agent.Resume ();
 					agent.updatePosition = true;
-					character.StopFight();
+					character.EndFight();
 					shouldWalk = true;
 
 				} else if (distance < closeDistance && !isClose){
@@ -94,7 +94,7 @@ namespace UnityStandardAssets.Characters.Enemy
 					Debug.Log ("The hero is far from me!");
 					//agent.Resume ();
 					agent.updatePosition = true;
-					character.StopFight();
+					character.EndFight();
 					shouldWalk = true;
 					isClose = false;
 				}

@@ -30,9 +30,10 @@ namespace UnityStandardAssets.Characters.Enemy
 		Vector3 m_CapsuleCenter;
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
-		float m_Life = 1.0f;
+		public float m_Life;
 		bool m_Enraged;
 		bool m_Fighting = false;
+		bool m_Hurting = false;
 
 
 		void Start()
@@ -178,12 +179,6 @@ namespace UnityStandardAssets.Characters.Enemy
 			}
 		}
 
-		public void StopFight(){
-			m_Fighting = false;
-			m_Enraged = false;
-			m_Animator.SetBool("Fight", false);
-		}
-
 		void Attack (){
 			//Debug.Log ("Attack");
 			if(m_Fighting)
@@ -212,20 +207,44 @@ namespace UnityStandardAssets.Characters.Enemy
 			Debug.Log ("EndEnraged");
 			m_Enraged = false;
 
-			Invoke ("EndFighting", 1.0f);
+			Invoke ("EndFight", 1.0f);
+		}
+
+		public void EndFight(){
+			m_Fighting = false;
+			m_Enraged = false;
+			m_Animator.SetBool("Fight", false);
+
+			//Invoke ("Fight", 2.0f);
 		}
 
 		public void Hurt (float damages){
+			if (m_Hurting)
+				return;
+
+			print ("enemy hurt");
+			Debug.Log (m_Hurting);
+
 			m_Life = m_Life - damages;
 			m_Animator.SetFloat("Life", m_Life);
 
-			if (m_Life <= 0.0f) {
+			if (m_Life > 0.0f) {
+				m_Hurting = true;
+				m_Animator.SetBool ("Hurt", m_Hurting);
+
+				Invoke ("HurtEnd", 1.40f);
+			} else {
 				print ("i'm dead");
 				NavMeshAgent agent = GetComponent<NavMeshAgent>();
 				agent.enabled = false;
-
 				Invoke ("Destroy", 10.0f);
 			}
+		}
+
+		void HurtEnd (){
+			print ("enemy hurt end");
+			m_Hurting = false;
+			m_Animator.SetBool ("Hurt", m_Hurting);
 		}
 
 		void Destroy(){

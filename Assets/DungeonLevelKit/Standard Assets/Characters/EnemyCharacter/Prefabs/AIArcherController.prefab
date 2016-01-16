@@ -1042,8 +1042,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127024}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.04, y: 2.7499998, z: -73.14}
+  m_LocalRotation: {x: 0, y: -0.637637, z: 0, w: 0.770337}
+  m_LocalPosition: {x: -12.67, y: 0.034, z: 20.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 491528}
@@ -1745,8 +1745,8 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.1
-  projectileSpeed: 800
   projectile: {fileID: 140432}
+  sword: {fileID: 0}
 --- !u!114 &11490008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1759,7 +1759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1200
-  damages: 1
+  damages: 0.5
 --- !u!135 &13561880
 SphereCollider:
   m_ObjectHideFlags: 1
