@@ -138,6 +138,7 @@ namespace UnityStandardAssets.Characters.Enemy
 				m_Animator.SetFloat ("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 				m_Animator.SetBool ("Crouch", m_Crouching);
 				m_Animator.SetBool ("Fight", m_Fighting);
+				m_Animator.SetBool("Enraged", m_Enraged);
 				m_Animator.SetBool ("OnGround", m_IsGrounded);
 				if (!m_IsGrounded) {
 					m_Animator.SetFloat ("Jump", m_Rigidbody.velocity.y);
@@ -179,7 +180,7 @@ namespace UnityStandardAssets.Characters.Enemy
 
 		public void StopFight(){
 			m_Fighting = false;
-			m_Animator.SetBool("Enraged", false);
+			m_Enraged = false;
 			m_Animator.SetBool("Fight", false);
 		}
 
@@ -187,31 +188,31 @@ namespace UnityStandardAssets.Characters.Enemy
 			//Debug.Log ("Attack");
 			if(m_Fighting)
 				m_Animator.SetBool("Fight", true);
-				Invoke ("SendAttack", 1.05f);
-				Invoke ("Enraged", 1.10f);
+				Invoke ("SendProjectile", 1.05f);
+				Invoke ("Enrage", 1.10f);
 		}
 
-		void SendAttack(){
+		void SendProjectile(){
 			if (projectile) {
 				GameObject newProjectile;
 				newProjectile = Instantiate (projectile, projectile.transform.position, projectile.transform.rotation) as GameObject;
 				newProjectile.SetActive (true);
-			} else if(sword){
-
 			}
 		}
 
-		void Enraged(){
-			//Debug.Log ("Enraged");
-			m_Animator.SetBool("Enraged", true);
-			m_Animator.SetBool ("Fight", false);
+		void Enrage(){
+			//Debug.Log ("Enrage");
+			m_Enraged = true;
+			m_Fighting = false;
 
-			Invoke ("EndEnraged", 2.10f);
+			Invoke ("EndEnrage", 2.10f);
 		}
 			
-		void EndEnraged (){
-			//Debug.Log ("EndEnraged");
-			m_Animator.SetBool ("Enraged", false);
+		void EndEnrage (){
+			Debug.Log ("EndEnraged");
+			m_Enraged = false;
+
+			Invoke ("EndFighting", 1.0f);
 		}
 
 		public void Hurt (float damages){
@@ -221,7 +222,6 @@ namespace UnityStandardAssets.Characters.Enemy
 			if (m_Life <= 0.0f) {
 				print ("i'm dead");
 				NavMeshAgent agent = GetComponent<NavMeshAgent>();
-				Debug.Log (agent);
 				agent.enabled = false;
 
 				Invoke ("Destroy", 10.0f);

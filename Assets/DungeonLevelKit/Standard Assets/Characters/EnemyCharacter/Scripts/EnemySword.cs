@@ -5,6 +5,7 @@ using UnityStandardAssets.Characters.ThirdPerson;
 namespace UnityStandardAssets.Characters.Enemy {
 	public class EnemySword : MonoBehaviour {
 
+		public float damages = 0.5f;
 		ThirdPersonCharacter thirdPersonCharacter;
 		GameObject thirdPerson;
 
@@ -25,24 +26,23 @@ namespace UnityStandardAssets.Characters.Enemy {
 				var enemy = transform.root.gameObject;
 				var stateInfo =  enemy.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
 
-				if (stateInfo.IsName("AttackSlice") || stateInfo.IsName("AttackCleave") || stateInfo.IsName("AttackStab")){
+				if (stateInfo.IsName("Fighting")){
 
 					float distance = Vector3.Distance(collision.gameObject.transform.position, transform.position);
 
-					print (distance);
-
 					if (distance < 2) {
 						thirdPerson = collision.gameObject;
-						Invoke ("KillThirdPerson", 0.6f);
+						HurtThirdPerson ();
 					}
 				}
 			}
 		}
 
-		void KillThirdPerson(){
-			print ("killed");
+		void HurtThirdPerson(){
+			print ("hero hurted");
+			print (damages);
 			thirdPersonCharacter = thirdPerson.GetComponent<ThirdPersonCharacter>();
-			thirdPersonCharacter.Hurt(1.0f);
+			thirdPersonCharacter.Hurt(damages);
 		}
 
 		public void toggleCollider(bool state){

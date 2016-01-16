@@ -31,6 +31,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		Vector3 m_CapsuleCenter;
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
+		bool m_Damage;
 		float m_Life = 1.0f;
 
 
@@ -50,6 +51,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		public void Move(Vector3 move, bool crouch, bool jump)
 		{
 
+			if (m_Life <= 0.0f) {
+				return;
+			}
+			
 			// convert the world relative moveInput vector into a local-relative
 			// turn amount and forward amount required to head in the desired
 			// direction.
@@ -126,6 +131,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetBool("Crouch", m_Crouching);
 			m_Animator.SetBool("OnGround", m_IsGrounded);
+
 			if (!m_IsGrounded)
 			{
 				m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
@@ -247,13 +253,25 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		}
 
 		public void Hurt (float damages){
+			if (m_Damage)
+				return;
+			
 			m_Life = m_Life - damages;
 			m_Animator.SetFloat("Life", m_Life);
 
+			if (m_Life > 0.0f) {
+				m_Damage = true;
+				m_Animator.SetBool ("Damage", m_Damage);
 
-			if (m_Life <= 0.0f) {
+				Invoke ("HurtEnd", 0.20f);
+			} else {
 				print ("GAME OVER !");
 			}
+		}
+
+		void HurtEnd (){
+			m_Damage = false;
+			m_Animator.SetBool ("Damage", m_Damage);
 		}
 	}
 }

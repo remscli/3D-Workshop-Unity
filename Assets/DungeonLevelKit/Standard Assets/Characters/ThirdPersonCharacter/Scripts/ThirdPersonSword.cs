@@ -22,7 +22,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson {
 		{
 			//print (collision.gameObject.name);
 			if (collision.gameObject.name == "AIArcherController" 
-				|| collision.gameObject.name == "AIWarriorController") {
+				|| collision.gameObject.name == "AIWarriorController"
+				|| collision.gameObject.name == "AIMageController") {
 				var hero = transform.root.gameObject;
 				var stateInfo =  hero.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
 
