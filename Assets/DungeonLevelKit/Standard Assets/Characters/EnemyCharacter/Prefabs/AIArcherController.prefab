@@ -1747,6 +1747,7 @@ MonoBehaviour:
   m_GroundCheckDistance: 0.1
   projectile: {fileID: 140432}
   sword: {fileID: 0}
+  m_Life: 1
 --- !u!114 &11490008
 MonoBehaviour:
   m_ObjectHideFlags: 1

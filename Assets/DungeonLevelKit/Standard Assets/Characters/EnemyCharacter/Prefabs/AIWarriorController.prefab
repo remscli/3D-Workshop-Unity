@@ -1657,6 +1657,7 @@ MonoBehaviour:
   m_GroundCheckDistance: 0.1
   projectile: {fileID: 0}
   sword: {fileID: 151732}
+  m_Life: 1
 --- !u!135 &13570176
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -18,8 +18,10 @@ namespace UnityStandardAssets.Characters.Enemy
 
 		Rigidbody m_Rigidbody;
 		Animator m_Animator;
+		CharacterAIControl m_AIControl;
 		public GameObject projectile;
 		public GameObject sword;
+		public string attackType;
 		bool m_IsGrounded = true;
 		float m_OrigGroundCheckDistance;
 		const float k_Half = 0.5f;
@@ -41,6 +43,7 @@ namespace UnityStandardAssets.Characters.Enemy
 			m_Animator = GetComponent<Animator>();
 			m_Rigidbody = GetComponent<Rigidbody>();
 			m_Capsule = GetComponent<CapsuleCollider>();
+			m_AIControl = GetComponent<CharacterAIControl>();
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
 
@@ -214,6 +217,8 @@ namespace UnityStandardAssets.Characters.Enemy
 			m_Fighting = false;
 			m_Enraged = false;
 			m_Animator.SetBool("Fight", false);
+
+			m_AIControl.ShouldWalk ();
 
 			//Invoke ("Fight", 2.0f);
 		}

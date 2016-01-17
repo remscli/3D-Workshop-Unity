@@ -13,7 +13,6 @@ namespace UnityStandardAssets.Characters.Enemy
 		public Transform target; // target to aim for
 		public float closeDistance = 4.6F;
 		bool shouldWalk;
-		bool isClose = false;
 
         // Use this for initialization
         private void Start()
@@ -53,30 +52,9 @@ namespace UnityStandardAssets.Characters.Enemy
 		void OnTriggerEnter(Collider collision) 
 		{
 			if (agent.enabled && collision.gameObject.name == "ThirdPersonController") {
-
 				//Debug.Log ("Collision Enter");
-				//Debug.Log (isClose);
 
-				// Get distance and stop enemy if hero is close
-				float distance = Vector3.Distance(collision.gameObject.transform.position, transform.position);
-
-				//Debug.Log (distance);
-
-				if (distance > closeDistance && !isClose){
-					Debug.Log ("The hero is far from me!");
-					//agent.Resume ();
-					agent.updatePosition = true;
-					character.EndFight();
-					shouldWalk = true;
-
-				} else if (distance < closeDistance && !isClose){
-					Debug.Log ("The hero is close to me!");	
-					//agent.Stop ();
-					agent.updatePosition = false;
-					character.Fight();
-					shouldWalk = false;
-					isClose = true;
-				}
+				ShouldWalk ();
 			}
 		}
 
@@ -84,20 +62,27 @@ namespace UnityStandardAssets.Characters.Enemy
 		{
 			if (agent.enabled && collision.gameObject.name == "ThirdPersonController") {
 				//Debug.Log ("Collision Exit");
-				//Debug.Log (isClose);
-				// Get distance and make enemy walk if hero is far
-				float distance = Vector3.Distance(collision.gameObject.transform.position, transform.position);
 
-				//Debug.Log (distance);
+				ShouldWalk ();
+			}
+		}
+		 
+		public void ShouldWalk(){
+			float distance = Vector3.Distance (target.position, transform.position);
 
-				if (distance > closeDistance && isClose){
-					Debug.Log ("The hero is far from me!");
-					//agent.Resume ();
-					agent.updatePosition = true;
-					character.EndFight();
-					shouldWalk = true;
-					isClose = false;
-				}
+			if ( distance > closeDistance) {
+				Debug.Log ("The hero is far from me!");
+				//agent.Resume ();
+				agent.updatePosition = true;
+				shouldWalk = true;
+
+			} else {
+				Debug.Log ("The hero is close to me!");	
+				//agent.Stop ();
+				agent.updatePosition = false;
+				shouldWalk = false;
+
+				character.Fight();
 			}
 		}
     }
