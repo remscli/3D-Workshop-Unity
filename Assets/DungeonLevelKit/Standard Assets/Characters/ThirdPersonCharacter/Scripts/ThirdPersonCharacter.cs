@@ -277,5 +277,21 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Hurting = false;
 			m_Animator.SetBool ("Hurt", m_Hurting);
 		}
+
+
+		void OnTriggerEnter(Collider collision)
+		{
+			//print (collision.gameObject.name);
+			if (collision.gameObject.name == "Medipack") {
+				print ("medipack");
+
+				var medipack = collision.gameObject;
+
+				Destroy (medipack);
+
+				m_Life = 1.0f;
+				m_Animator.SetFloat ("Life", m_Life);
+			}
+		}
 	}
 }

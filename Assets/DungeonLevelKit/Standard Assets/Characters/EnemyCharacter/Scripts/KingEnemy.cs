@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ArcherEnemy : MonoBehaviour {
+public class KingEnemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
