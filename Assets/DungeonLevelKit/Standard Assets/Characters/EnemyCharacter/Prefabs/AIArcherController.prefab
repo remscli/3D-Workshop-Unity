@@ -1747,6 +1747,7 @@ MonoBehaviour:
   m_GroundCheckDistance: 0.1
   projectile: {fileID: 140432}
   sword: {fileID: 0}
+  attackType: stay-away
   m_Life: 1
 --- !u!114 &11490008
 MonoBehaviour:
@@ -1760,7 +1761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1200
-  damages: 0.5
+  damages: 0.25
 --- !u!135 &13561880
 SphereCollider:
   m_ObjectHideFlags: 1

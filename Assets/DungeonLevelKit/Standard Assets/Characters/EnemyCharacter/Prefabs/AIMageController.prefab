@@ -1698,7 +1698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3415f963fb5641158a5f62eb1c5a6e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damages: 0.5
+  damages: 0.35
 --- !u!114 &11455336
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1733,6 +1733,7 @@ MonoBehaviour:
   m_GroundCheckDistance: 0.1
   projectile: {fileID: 0}
   sword: {fileID: 107324}
+  attackType: hand-to-hand
   m_Life: 1
 --- !u!135 &13542050
 SphereCollider:

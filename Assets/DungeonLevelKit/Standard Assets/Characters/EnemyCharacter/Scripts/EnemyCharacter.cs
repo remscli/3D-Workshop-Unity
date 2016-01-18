@@ -21,6 +21,7 @@ namespace UnityStandardAssets.Characters.Enemy
 		CharacterAIControl m_AIControl;
 		public GameObject projectile;
 		public GameObject sword;
+		KingEnemy King;
 		public string attackType;
 		bool m_IsGrounded = true;
 		float m_OrigGroundCheckDistance;
@@ -44,6 +45,7 @@ namespace UnityStandardAssets.Characters.Enemy
 			m_Rigidbody = GetComponent<Rigidbody>();
 			m_Capsule = GetComponent<CapsuleCollider>();
 			m_AIControl = GetComponent<CharacterAIControl>();
+			King = GetComponent<KingEnemy> ();
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
 
@@ -172,7 +174,7 @@ namespace UnityStandardAssets.Characters.Enemy
 
 		public void Fight(){
 			//Debug.Log ("Fight");
-			if(!m_Fighting){
+			if(!m_Fighting && m_Life > 0.0f){
 				m_Fighting = true;
 				//Debug.Log ("Fight");
 				m_Animator.SetFloat ("Forward", 0.0f);
@@ -184,10 +186,11 @@ namespace UnityStandardAssets.Characters.Enemy
 
 		void Attack (){
 			//Debug.Log ("Attack");
-			if(m_Fighting)
-				m_Animator.SetBool("Fight", true);
+			if (m_Fighting) {
+				m_Animator.SetBool ("Fight", true);
 				Invoke ("SendProjectile", 1.05f);
 				Invoke ("Enrage", 1.10f);
+			}
 		}
 
 		void SendProjectile(){
@@ -233,6 +236,10 @@ namespace UnityStandardAssets.Characters.Enemy
 			m_Life = m_Life - damages;
 			m_Animator.SetFloat("Life", m_Life);
 
+
+			if (gameObject.name == "AIKingController")
+				King.UpdateLife (m_Life);
+
 			if (m_Life > 0.0f) {
 				m_Hurting = true;
 				m_Animator.SetBool ("Hurt", m_Hurting);
@@ -242,6 +249,11 @@ namespace UnityStandardAssets.Characters.Enemy
 				print ("i'm dead");
 				NavMeshAgent agent = GetComponent<NavMeshAgent>();
 				agent.enabled = false;
+
+
+				if (gameObject.name == "AIKingController")
+					King.Die ();
+				
 				Invoke ("Destroy", 10.0f);
 			}
 		}

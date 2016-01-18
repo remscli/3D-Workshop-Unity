@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
@@ -18,6 +19,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		Rigidbody m_Rigidbody;
 		Animator m_Animator;
+		GameObject m_Lifebar; 
+		Slider m_Lifebar_Slider;
 		public ThirdPersonSword sword;
 		bool m_IsGrounded;
 		float m_OrigGroundCheckDistance;
@@ -40,6 +43,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Animator = GetComponent<Animator>();
 			m_Rigidbody = GetComponent<Rigidbody>();
 			m_Capsule = GetComponent<CapsuleCollider>();
+			m_Lifebar =  GameObject.Find("Lifebar");
+			m_Lifebar_Slider = m_Lifebar.GetComponent<Slider> ();
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
 
@@ -262,6 +267,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Life = m_Life - damages;
 			m_Animator.SetFloat("Life", m_Life);
 
+			m_Lifebar_Slider.value = m_Life;
+
 			if (m_Life > 0.0f) {
 				m_Hurting = true;
 				m_Animator.SetBool ("Hurt", m_Hurting);
@@ -291,6 +298,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 				m_Life = 1.0f;
 				m_Animator.SetFloat ("Life", m_Life);
+
+				m_Lifebar_Slider.value = m_Life;
 			}
 		}
 	}

@@ -18,21 +18,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &146226
+--- !u!1 &129950
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 408834}
-  - 108: {fileID: 10826160}
+  - 4: {fileID: 488832}
+  - 108: {fileID: 10822376}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Point light 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &172576
 GameObject:
@@ -44,24 +44,12 @@ GameObject:
   - 4: {fileID: 488060}
   - 108: {fileID: 10803862}
   m_Layer: 0
-  m_Name: Point light (1)
+  m_Name: Dir light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &408834
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146226}
-  m_LocalRotation: {x: 0.07473944, y: -0.010970848, z: 0.99583006, w: -0.05114961}
-  m_LocalPosition: {x: 0.0085, y: -0.0008, z: 0.1802}
-  m_LocalScale: {x: 0.3189646, y: 0.31896457, z: 0.54586303}
-  m_Children: []
-  m_Father: {fileID: 478850}
-  m_RootOrder: 0
 --- !u!4 &478850
 Transform:
   m_ObjectHideFlags: 1
@@ -69,11 +57,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103426}
   m_LocalRotation: {x: 0, y: 0.25748956, z: 0, w: 0.9662811}
-  m_LocalPosition: {x: -20.44, y: 3.76, z: 41.72}
+  m_LocalPosition: {x: -24.96, y: 3.76, z: 31.2}
   m_LocalScale: {x: 3.3270104, y: 3.327011, z: 3.327011}
   m_Children:
-  - {fileID: 408834}
   - {fileID: 488060}
+  - {fileID: 488832}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &488060
@@ -82,9 +70,21 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172576}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.114, y: 0.062, z: 0.073}
+  m_LocalRotation: {x: -0.915568, y: 0.0000000014106363, z: 0.000000017472257, w: 0.40216336}
+  m_LocalPosition: {x: -0.005, y: -0.162, z: 0.165}
   m_LocalScale: {x: 0.77026486, y: 0.77026486, z: 0.77026486}
+  m_Children: []
+  m_Father: {fileID: 478850}
+  m_RootOrder: 0
+--- !u!4 &488832
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129950}
+  m_LocalRotation: {x: 0, y: -0.8653366, z: 0, w: 0.50119126}
+  m_LocalPosition: {x: -0.024, y: -0.154, z: -0.038}
+  m_LocalScale: {x: 0.30057, y: 0.30057007, z: 0.30057004}
   m_Children: []
   m_Father: {fileID: 478850}
   m_RootOrder: 1
@@ -141,12 +141,12 @@ Light:
   m_GameObject: {fileID: 172576}
   m_Enabled: 1
   serializedVersion: 6
-  m_Type: 2
+  m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_CookieSize: 10
+  m_Intensity: 8
+  m_Range: 1.06
+  m_SpotAngle: 93
+  m_CookieSize: 6.03
   m_Shadows:
     m_Type: 0
     m_Resolution: -1
@@ -162,26 +162,26 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_Lightmapping: 4
-  m_BounceIntensity: 1
+  m_BounceIntensity: 2.09
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!108 &10826160
+--- !u!108 &10822376
 Light:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146226}
+  m_GameObject: {fileID: 129950}
   m_Enabled: 1
   serializedVersion: 6
-  m_Type: 1
-  m_Color: {r: 1, g: 0.42647058, b: 0.42647058, a: 1}
-  m_Intensity: 1
-  m_Range: 9.91
+  m_Type: 2
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Intensity: 8
+  m_Range: 4
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_Strength: 1
     m_Bias: 0.05
@@ -194,8 +194,8 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
-  m_BounceIntensity: 1
+  m_Lightmapping: 2
+  m_BounceIntensity: 3.07
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
