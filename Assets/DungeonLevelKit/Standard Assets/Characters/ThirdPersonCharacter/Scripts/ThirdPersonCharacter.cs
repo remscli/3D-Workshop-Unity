@@ -37,7 +37,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		bool m_Crouching;
 		bool m_Hurting = false;
 		float m_Life = 1.0f;
-
+		AudioSource swordSound;
 
 		void Start()
 		{
@@ -51,6 +51,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
+
+			swordSound = GetComponent<AudioSource>();
 		}
 
 
@@ -252,6 +254,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 
+		public void PlaySwordSound(){
+			swordSound.Play ();
+		}
+
 		void AttackEnd (){
 			m_Animator.SetBool (currentAttack, false);
 			currentAttack = "";
@@ -290,8 +296,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		void OnTriggerEnter(Collider collision)
 		{
 			//print (collision.gameObject.name);
-			if (collision.gameObject.name == "Medipack") {
-				print ("medipack");
+			if (collision.gameObject.tag == "Medipack") {
 
 				var medipack = collision.gameObject;
 

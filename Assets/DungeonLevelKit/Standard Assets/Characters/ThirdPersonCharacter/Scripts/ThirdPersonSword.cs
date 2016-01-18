@@ -20,12 +20,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson {
 
 		void OnTriggerEnter(Collider collision)
 		{
-			//print (collision.gameObject.name);
-			if (collision.gameObject.name == "AIArcherController" 
-				|| collision.gameObject.name == "AIWarriorController"
-				|| collision.gameObject.name == "AIMageController"
-				|| collision.gameObject.name == "AIKingController") {
+			if (collision.gameObject.tag == "Enemy") {
 				var hero = transform.root.gameObject;
+
 				var stateInfo =  hero.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
 
 				if (stateInfo.IsName("AttackSlice") || stateInfo.IsName("AttackCleave") || stateInfo.IsName("AttackStab")){
@@ -35,6 +32,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson {
 					print (distance);
 
 					if (distance < 2) {
+
+						hero.GetComponent<ThirdPersonCharacter> ().PlaySwordSound ();
+
 						enemy = collision.gameObject;
 						Invoke ("KillEnemy", 0.6f);
 					}

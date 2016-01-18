@@ -187,7 +187,7 @@ namespace UnityStandardAssets.Characters.Enemy
 				m_Fighting = true;
 
 				if (projectile) {
-					Invoke ("SendProjectile", 1.4f);
+					Invoke ("SendProjectile", 0.75f);
 				} else if (magicWand){
 					Invoke ("SendParticles", 0.75f);
 				}

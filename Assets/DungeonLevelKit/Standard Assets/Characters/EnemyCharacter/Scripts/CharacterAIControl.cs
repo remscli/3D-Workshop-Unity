@@ -18,21 +18,26 @@ namespace UnityStandardAssets.Characters.Enemy
         private void Start()
         {
             // get the components on the object we need ( should not be null due to require component so no need to check )
-            agent = GetComponentInChildren<NavMeshAgent>();
+			agent = GetComponentInChildren<NavMeshAgent>();
 			character = GetComponent<EnemyCharacter>();
 			shouldWalk = false;
+			agent.Stop ();
 
-	        agent.updateRotation = true;
-	        agent.updatePosition = true;
+			agent.updatePosition = false;
         }
 
 
         // Update is called once per frame
         private void Update()
-        {
-			if (agent.enabled && target != null && shouldWalk)
-            {
-				agent.SetDestination(target.position);
+		{
+			if (!agent.enabled)
+				return;
+
+			agent.SetDestination(target.position);
+
+			if (target != null && shouldWalk)
+			{
+				transform.position = agent.nextPosition;
 				character.Move (agent.desiredVelocity, false, false);
             }
             else
@@ -68,7 +73,6 @@ namespace UnityStandardAssets.Characters.Enemy
 		}
 		 
 		public void ShouldWalk(){
-			print (agent.enabled);
 
 			if (!agent.enabled)
 				return;
@@ -77,15 +81,17 @@ namespace UnityStandardAssets.Characters.Enemy
 
 			if ( distance > closeDistance) {
 				Debug.Log ("The hero is far from me!");
-				agent.Resume ();
-				//agent.updatePosition = true;
 				shouldWalk = true;
+
+				agent.Resume ();
 
 			} else {
 				Debug.Log ("The hero is close to me!");	
-				agent.Stop ();
-				//agent.updatePosition = false;
 				shouldWalk = false;
+
+				agent.Stop ();
+
+				transform.LookAt(target.position,Vector3.up);
 
 				character.Fight();
 			}

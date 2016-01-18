@@ -13,7 +13,7 @@ GameObject:
   - 65: {fileID: 6574096}
   m_Layer: 0
   m_Name: Medipack
-  m_TagString: Untagged
+  m_TagString: Medipack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,8 +56,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103426}
-  m_LocalRotation: {x: 0, y: 0.25748956, z: 0, w: 0.9662811}
-  m_LocalPosition: {x: -24.96, y: 3.76, z: 31.2}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.96, y: 3.98, z: -46.06277}
   m_LocalScale: {x: 3.3270104, y: 3.327011, z: 3.327011}
   m_Children:
   - {fileID: 488060}
