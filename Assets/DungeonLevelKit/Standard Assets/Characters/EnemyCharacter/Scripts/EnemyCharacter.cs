@@ -37,6 +37,7 @@ namespace UnityStandardAssets.Characters.Enemy
 		bool m_Enraged;
 		bool m_Fighting = false;
 		bool m_Hurting = false;
+		AudioSource attackSound;
 
 
 		void Start()
@@ -48,6 +49,8 @@ namespace UnityStandardAssets.Characters.Enemy
 			King = GetComponent<KingEnemy> ();
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
+
+			attackSound = GetComponent<AudioSource>();
 
 			// Hide projectile model by default
 			if(projectile)
@@ -188,16 +191,24 @@ namespace UnityStandardAssets.Characters.Enemy
 
 				if (projectile) {
 					Invoke ("SendProjectile", 0.75f);
-				} else if (magicWand){
+				} else if (magicWand) {
 					Invoke ("SendParticles", 0.75f);
+				} else {
+					Invoke ("SendSwordPunch", 0.2f);
 				}
 
 				Invoke ("Enrage", 1.30f);
 			}
 		}
 
+		void SendSwordPunch(){
+			if(!attackSound.isPlaying)
+				attackSound.Play ();
+		}
+
 		void SendProjectile(){
 			print ("SEND PROJECTILE");
+			attackSound.Play ();
 			GameObject newProjectile;
 			newProjectile = Instantiate (projectile, projectile.transform.position, projectile.transform.rotation) as GameObject;
 			newProjectile.SetActive (true);
@@ -205,6 +216,7 @@ namespace UnityStandardAssets.Characters.Enemy
 
 		void SendParticles(){
 			print ("SEND PARTICULES");
+			attackSound.Play ();
 			magicWand.GetComponent<EnemyMagicWand>().Play ();
 		}
 
