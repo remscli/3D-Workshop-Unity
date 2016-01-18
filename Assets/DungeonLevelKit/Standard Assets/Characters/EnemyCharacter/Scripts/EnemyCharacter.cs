@@ -20,7 +20,7 @@ namespace UnityStandardAssets.Characters.Enemy
 		Animator m_Animator;
 		CharacterAIControl m_AIControl;
 		public GameObject projectile;
-		public GameObject sword;
+		public GameObject magicWand;
 		KingEnemy King;
 		public string attackType;
 		bool m_IsGrounded = true;
@@ -55,6 +55,12 @@ namespace UnityStandardAssets.Characters.Enemy
 
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
+		}
+
+		void Update(){
+			m_Animator.SetBool ("Hurt", m_Hurting);
+			m_Animator.SetBool ("Fight", m_Fighting);
+			m_Animator.SetBool ("Enraged", m_Enraged);
 		}
 
 
@@ -143,8 +149,6 @@ namespace UnityStandardAssets.Characters.Enemy
 				m_Animator.SetFloat ("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
 				m_Animator.SetFloat ("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 				m_Animator.SetBool ("Crouch", m_Crouching);
-				m_Animator.SetBool ("Fight", m_Fighting);
-				m_Animator.SetBool("Enraged", m_Enraged);
 				m_Animator.SetBool ("OnGround", m_IsGrounded);
 				if (!m_IsGrounded) {
 					m_Animator.SetFloat ("Jump", m_Rigidbody.velocity.y);
@@ -175,63 +179,58 @@ namespace UnityStandardAssets.Characters.Enemy
 		public void Fight(){
 			//Debug.Log ("Fight");
 			if(!m_Fighting && m_Life > 0.0f){
-				m_Fighting = true;
 				//Debug.Log ("Fight");
 				m_Animator.SetFloat ("Forward", 0.0f);
 
-				Attack ();
-				//InvokeRepeating ("Attack", 0f, 6.0f);
-			}
-		}
+				print ("ATTACK");
 
-		void Attack (){
-			//Debug.Log ("Attack");
-			if (m_Fighting) {
-				m_Animator.SetBool ("Fight", true);
-				Invoke ("SendProjectile", 1.05f);
-				Invoke ("Enrage", 1.10f);
+				m_Fighting = true;
+
+				if (projectile) {
+					Invoke ("SendProjectile", 1.4f);
+				} else if (magicWand){
+					Invoke ("SendParticles", 0.75f);
+				}
+
+				Invoke ("Enrage", 1.30f);
 			}
 		}
 
 		void SendProjectile(){
-			if (projectile) {
-				GameObject newProjectile;
-				newProjectile = Instantiate (projectile, projectile.transform.position, projectile.transform.rotation) as GameObject;
-				newProjectile.SetActive (true);
-			}
+			print ("SEND PROJECTILE");
+			GameObject newProjectile;
+			newProjectile = Instantiate (projectile, projectile.transform.position, projectile.transform.rotation) as GameObject;
+			newProjectile.SetActive (true);
+		}
+
+		void SendParticles(){
+			print ("SEND PARTICULES");
+			magicWand.GetComponent<EnemyMagicWand>().Play ();
 		}
 
 		void Enrage(){
 			//Debug.Log ("Enrage");
 			m_Enraged = true;
-			m_Fighting = false;
 
-			Invoke ("EndEnrage", 2.10f);
+			Invoke ("EndFight", 2.0f);
 		}
 			
-		void EndEnrage (){
-			Debug.Log ("EndEnraged");
-			m_Enraged = false;
-
-			Invoke ("EndFight", 1.0f);
-		}
-
 		public void EndFight(){
+			Debug.Log ("EndFight");
+
 			m_Fighting = false;
 			m_Enraged = false;
-			m_Animator.SetBool("Fight", false);
 
+			Invoke ("ToggleNextFight", 2.0f);
+		}
+
+		void ToggleNextFight(){
 			m_AIControl.ShouldWalk ();
-
-			//Invoke ("Fight", 2.0f);
 		}
 
 		public void Hurt (float damages){
 			if (m_Hurting)
 				return;
-
-			print ("enemy hurt");
-			Debug.Log (m_Hurting);
 
 			m_Life = m_Life - damages;
 			m_Animator.SetFloat("Life", m_Life);
@@ -242,14 +241,18 @@ namespace UnityStandardAssets.Characters.Enemy
 
 			if (m_Life > 0.0f) {
 				m_Hurting = true;
-				m_Animator.SetBool ("Hurt", m_Hurting);
 
 				Invoke ("HurtEnd", 1.40f);
 			} else {
-				print ("i'm dead");
 				NavMeshAgent agent = GetComponent<NavMeshAgent>();
-				agent.enabled = false;
 
+				if (!agent.enabled)
+					return;
+
+				print ("i'm dead");
+
+				agent.Stop ();
+				agent.enabled = false;
 
 				if (gameObject.name == "AIKingController")
 					King.Die ();
@@ -259,9 +262,7 @@ namespace UnityStandardAssets.Characters.Enemy
 		}
 
 		void HurtEnd (){
-			print ("enemy hurt end");
 			m_Hurting = false;
-			m_Animator.SetBool ("Hurt", m_Hurting);
 		}
 
 		void Destroy(){

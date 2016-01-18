@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.Enemy;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
@@ -301,6 +302,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 				m_Lifebar_Slider.value = m_Life;
 			}
+		}
+
+		void OnParticleCollision(GameObject other)
+		{
+			print ("COLLISION : " + other.transform.parent.gameObject.GetComponent<EnemyMagicWand>().damages);
+			Hurt (other.transform.parent.gameObject.GetComponent<EnemyMagicWand>().damages);
 		}
 	}
 }

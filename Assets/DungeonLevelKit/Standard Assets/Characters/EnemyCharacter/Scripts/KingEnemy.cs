@@ -13,7 +13,6 @@ namespace UnityStandardAssets.Characters.Enemy
 		// Use this for initialization
 		void Start () {
 			m_Lifebar =  GameObject.Find("King_Lifebar");
-			Debug.Log (m_Lifebar);
 			m_Lifebar_Slider = m_Lifebar.GetComponent<Slider> ();
 			m_Life = GetComponent<EnemyCharacter> ().m_Life;
 		}
@@ -24,7 +23,6 @@ namespace UnityStandardAssets.Characters.Enemy
 		}
 
 		public void UpdateLife(float newLife){
-			print ("DecreaseLife : " + newLife / m_Life);
 			m_Lifebar_Slider.value = newLife / m_Life;
 		}
 

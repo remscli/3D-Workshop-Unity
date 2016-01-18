@@ -68,18 +68,23 @@ namespace UnityStandardAssets.Characters.Enemy
 		}
 		 
 		public void ShouldWalk(){
+			print (agent.enabled);
+
+			if (!agent.enabled)
+				return;
+
 			float distance = Vector3.Distance (target.position, transform.position);
 
 			if ( distance > closeDistance) {
 				Debug.Log ("The hero is far from me!");
-				//agent.Resume ();
-				agent.updatePosition = true;
+				agent.Resume ();
+				//agent.updatePosition = true;
 				shouldWalk = true;
 
 			} else {
 				Debug.Log ("The hero is close to me!");	
-				//agent.Stop ();
-				agent.updatePosition = false;
+				agent.Stop ();
+				//agent.updatePosition = false;
 				shouldWalk = false;
 
 				character.Fight();
