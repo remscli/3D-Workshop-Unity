@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityStandardAssets.Characters.ThirdPerson;
 
 namespace UnityStandardAssets.Characters.Enemy {
@@ -9,19 +8,8 @@ namespace UnityStandardAssets.Characters.Enemy {
 		ThirdPersonCharacter thirdPersonCharacter;
 		GameObject thirdPerson;
 
-		// Use this for initialization
-		void Start () {
-
-		}
-
-		// Update is called once per frame
-		void Update () {
-
-		}
-
 		void OnTriggerEnter(Collider collision)
 		{
-			//print (collision.gameObject.name);
 			if (collision.gameObject.name == "ThirdPersonController") {
 				var enemy = transform.root.gameObject;
 				var stateInfo =  enemy.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
@@ -39,7 +27,6 @@ namespace UnityStandardAssets.Characters.Enemy {
 		}
 
 		void HurtThirdPerson(){
-			print ("hero hurted ! Damages : " + damages);
 			thirdPersonCharacter = thirdPerson.GetComponent<ThirdPersonCharacter>();
 			thirdPersonCharacter.Hurt(damages);
 		}

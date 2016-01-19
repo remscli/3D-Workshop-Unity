@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.ThirdPerson;
 
@@ -23,8 +22,6 @@ namespace UnityStandardAssets.Characters.Enemy
 			if(!m_Fighting && m_Life > 0.0f){
 				m_Animator.SetFloat ("Forward", 0.0f);
 
-				print ("ATTACK");
-
 				m_Fighting = true;
 
 				Invoke ("SendSwordPunch", 0.9f);
@@ -41,10 +38,6 @@ namespace UnityStandardAssets.Characters.Enemy
 
 		public override void UpdateLife(float newLife){
 			m_Lifebar_Slider.value = newLife / Start_Life;
-
-			if (newLife <= 0.0f) {
-				print ("WIN !");
-			}
 		}
 
 		public override void Die(){

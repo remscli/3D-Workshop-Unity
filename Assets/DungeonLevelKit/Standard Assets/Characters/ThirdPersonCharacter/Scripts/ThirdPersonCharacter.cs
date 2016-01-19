@@ -271,8 +271,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		}
 
 		public void Hurt (float damages){
-			print ("Hurt");
-			print (m_Hurting);
 
 			if (m_Hurting)
 				return;
@@ -293,7 +291,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		}
 
 		void HurtEnd (){
-			print ("hurt end");
 			m_Hurting = false;
 			m_Animator.SetBool ("Hurt", m_Hurting);
 		}
@@ -301,7 +298,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void OnTriggerEnter(Collider collision)
 		{
-			//print (collision.gameObject.name);
 			if (collision.gameObject.tag == "Medipack") {
 
 				var medipack = collision.gameObject;
@@ -317,7 +313,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void OnParticleCollision(GameObject other)
 		{
-			print ("COLLISION : " + other.transform.parent.gameObject.GetComponent<EnemyMagicWand>().damages);
 			Hurt (other.transform.parent.gameObject.GetComponent<EnemyMagicWand>().damages);
 		}
 

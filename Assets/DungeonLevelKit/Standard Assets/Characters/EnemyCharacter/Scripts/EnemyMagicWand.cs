@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityStandardAssets.Characters.ThirdPerson;
 
 namespace UnityStandardAssets.Characters.Enemy {
@@ -15,12 +14,7 @@ namespace UnityStandardAssets.Characters.Enemy {
 			particles = transform.FindChild ("Particle System").GetComponent<ParticleSystem> ();
 			particles.Stop ();
 		}
-		
-		// Update is called once per frame
-		void Update () {
-		
-		}
-
+			
 		public void Play(){
 			particles.Play ();
 		}

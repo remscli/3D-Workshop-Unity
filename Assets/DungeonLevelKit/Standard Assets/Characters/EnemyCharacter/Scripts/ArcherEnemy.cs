@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
 
 namespace UnityStandardAssets.Characters.Enemy
 {
@@ -15,11 +13,7 @@ namespace UnityStandardAssets.Characters.Enemy
 		}
 
 		public override void Fight(){
-
-			print ("ARCHER FIGHT");
-
 			if(!m_Fighting && m_Life > 0.0f){
-				//Debug.Log ("Fight");
 				m_Animator.SetFloat ("Forward", 0.0f);
 
 				m_Fighting = true;
@@ -31,7 +25,6 @@ namespace UnityStandardAssets.Characters.Enemy
 		}
 
 		void SendArrow(){
-			print ("SEND ARROW");
 			attackSound.Play ();
 			GameObject newProjectile;
 			newProjectile = Instantiate (arrow, arrow.transform.position, arrow.transform.rotation) as GameObject;

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityStandardAssets.Characters.Enemy;
 
 namespace UnityStandardAssets.Characters.ThirdPerson {
@@ -7,16 +6,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson {
 
 		AEnemyCharacter enemyCharacter;
 		GameObject enemy;
-
-		// Use this for initialization
-		void Start () {
-		
-		}
-		
-		// Update is called once per frame
-		void Update () {
-		
-		}
 
 		void OnTriggerEnter(Collider collision)
 		{
@@ -28,8 +17,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson {
 				if (stateInfo.IsName("AttackSlice") || stateInfo.IsName("AttackCleave") || stateInfo.IsName("AttackStab")){
 
 					float distance = Vector3.Distance(collision.gameObject.transform.position, transform.position);
-
-					print (distance);
 
 					if (distance < 2) {
 
@@ -43,7 +30,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson {
 		}
 
 		void KillEnemy(){
-			print ("killed");
 			enemyCharacter = enemy.GetComponent<AEnemyCharacter>();
 			enemyCharacter.Hurt(1.0f);
 		}

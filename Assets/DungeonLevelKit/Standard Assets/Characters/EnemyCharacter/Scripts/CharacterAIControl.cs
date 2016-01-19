@@ -58,8 +58,6 @@ namespace UnityStandardAssets.Characters.Enemy
 		void OnTriggerEnter(Collider collision) 
 		{
 			if (agent.enabled && collision.gameObject.name == "ThirdPersonController") {
-				//Debug.Log ("Collision Enter");
-
 				ShouldWalk ();
 			}
 		}
@@ -67,8 +65,6 @@ namespace UnityStandardAssets.Characters.Enemy
 		void OnTriggerExit(Collider collision) 
 		{
 			if (agent.enabled && collision.gameObject.name == "ThirdPersonController") {
-				//Debug.Log ("Collision Exit");
-
 				ShouldWalk ();
 			}
 		}
@@ -81,13 +77,11 @@ namespace UnityStandardAssets.Characters.Enemy
 			float distance = Vector3.Distance (target.position, transform.position);
 
 			if ( distance > closeDistance) {
-				Debug.Log ("The hero is far from me!");
 				shouldWalk = true;
 
 				agent.Resume ();
 
 			} else {
-				Debug.Log ("The hero is close to me!");	
 				shouldWalk = false;
 
 				agent.Stop ();

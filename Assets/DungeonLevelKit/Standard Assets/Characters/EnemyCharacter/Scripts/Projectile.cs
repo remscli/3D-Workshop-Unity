@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityStandardAssets.Characters.ThirdPerson;
 
 namespace UnityStandardAssets.Characters.Enemy
@@ -15,17 +14,11 @@ namespace UnityStandardAssets.Characters.Enemy
 			projectileBody = gameObject.GetComponent<Rigidbody> ();
 			projectileBody.AddRelativeForce (Vector3.forward * speed);
 		}
-		
-		// Update is called once per frame
-		void Update () {
 			
-		}
-
 		void OnCollisionEnter(Collision collision){
 			Destroy (gameObject);
 
 			if (collision.collider.name == "ThirdPersonController") {
-				print ("hit");
 				GameObject hero = GameObject.Find (collision.collider.name);
 				ThirdPersonCharacter heroCharacter = hero.GetComponent ("ThirdPersonCharacter") as ThirdPersonCharacter;
 				Debug.Log (heroCharacter);

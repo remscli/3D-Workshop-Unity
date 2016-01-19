@@ -173,9 +173,7 @@ namespace UnityStandardAssets.Characters.Enemy
 
 		public abstract void Fight ();
 
-		public virtual void UpdateLife (float newLife){
-			print ("UPDATE LIFE");
-		}
+		public virtual void UpdateLife (float newLife){}
 
 		public virtual void Die (){}
 
@@ -185,15 +183,12 @@ namespace UnityStandardAssets.Characters.Enemy
 		}
 
 		void Enrage(){
-			//Debug.Log ("Enrage");
 			m_Enraged = true;
 
 			Invoke ("EndFight", 2.0f);
 		}
 			
 		public void EndFight(){
-			Debug.Log ("EndFight");
-
 			m_Fighting = false;
 			m_Enraged = false;
 
@@ -223,8 +218,6 @@ namespace UnityStandardAssets.Characters.Enemy
 
 				if (!agent.enabled)
 					return;
-
-				print ("i'm dead");
 
 				agent.Stop ();
 				agent.enabled = false;
