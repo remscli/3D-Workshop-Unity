@@ -2050,10 +2050,27 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.1
+  m_Rigidbody: {fileID: 0}
+  m_Animator: {fileID: 0}
+  m_AIControl: {fileID: 0}
   projectile: {fileID: 0}
   magicWand: {fileID: 0}
-  attackType: hand-to-hand
+  King: {fileID: 0}
+  attackType: 68616e642d746f2d68616e64
+  m_IsGrounded: 1
+  m_OrigGroundCheckDistance: 0
+  m_TurnAmount: 0
+  m_ForwardAmount: 0
+  m_GroundNormal: {x: 0, y: 0, z: 0}
+  m_CapsuleHeight: 0
+  m_CapsuleCenter: {x: 0, y: 0, z: 0}
+  m_Capsule: {fileID: 0}
+  m_Crouching: 0
   m_Life: 5
+  m_Enraged: 0
+  m_Fighting: 0
+  m_Hurting: 0
+  attackSound: {fileID: 0}
 --- !u!114 &11469180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2078,6 +2095,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9400f7d62bf934df0add2decbf58c160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_MovingTurnSpeed: 360
+  m_StationaryTurnSpeed: 180
+  m_JumpPower: 12
+  m_GravityMultiplier: 2
+  m_RunCycleLegOffset: 0.2
+  m_MoveSpeedMultiplier: 1
+  m_AnimSpeedMultiplier: 1
+  m_GroundCheckDistance: 0.1
+  projectile: {fileID: 0}
+  magicWand: {fileID: 0}
+  m_Life: 6
 --- !u!135 &13551828
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -2633,6 +2661,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Life
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

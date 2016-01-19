@@ -437,9 +437,9 @@ GameObject:
   - 195: {fileID: 19582632}
   - 136: {fileID: 13624454}
   - 114: {fileID: 11455336}
-  - 114: {fileID: 11473476}
   - 136: {fileID: 13623440}
   - 82: {fileID: 8281656}
+  - 114: {fileID: 11479842}
   m_Layer: 0
   m_Name: AIMageController
   m_TagString: Enemy
@@ -922,8 +922,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147126}
-  m_LocalRotation: {x: 0, y: -0.12888291, z: 0, w: 0.9916598}
-  m_LocalPosition: {x: 7.79, y: 0, z: 23.74}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
+  m_LocalPosition: {x: 6.18, y: 2.7499998, z: -58.846306}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 451912}
@@ -1804,7 +1804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   closeDistance: 9
---- !u!114 &11473476
+--- !u!114 &11479842
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1812,7 +1812,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 147126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d4c8dc1cdce4b61aa585cb2ec70876, type: 3}
+  m_Script: {fileID: 11500000, guid: 69fa016f0c23e41d8bc2964fda841401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_MovingTurnSpeed: 360
@@ -1825,7 +1825,6 @@ MonoBehaviour:
   m_GroundCheckDistance: 0.1
   projectile: {fileID: 0}
   magicWand: {fileID: 107324}
-  attackType: stay-away
   m_Life: 1
 --- !u!135 &13542050
 SphereCollider:
@@ -3715,6 +3714,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Life
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

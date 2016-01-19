@@ -4,34 +4,44 @@ using UnityEngine.UI;
 
 namespace UnityStandardAssets.Characters.Enemy
 {
-	public class KingEnemy : MonoBehaviour {
-
-		float m_Life;
-		GameObject m_Lifebar;
-		Slider m_Lifebar_Slider;
+	public class KingEnemy : AEnemyCharacter {
+		
+		public Slider m_Lifebar_Slider;
+		float Start_Life;
 
 		// Use this for initialization
-		void Start () {
-			m_Lifebar =  GameObject.Find("King_Lifebar");
-			m_Lifebar_Slider = m_Lifebar.GetComponent<Slider> ();
-			m_Life = GetComponent<EnemyCharacter> ().m_Life;
-		}
-		
-		// Update is called once per frame
-		void Update () {
-		
+		protected override void Start () {
+			base.Start();
+
+			Start_Life = m_Life;
 		}
 
-		public void UpdateLife(float newLife){
-			m_Lifebar_Slider.value = newLife / m_Life;
+		public override void Fight(){
+			//Debug.Log ("Fight");
+			if(!m_Fighting && m_Life > 0.0f){
+				//Debug.Log ("Fight");
+				m_Animator.SetFloat ("Forward", 0.0f);
+
+				print ("ATTACK");
+
+				m_Fighting = true;
+
+				Invoke ("SendSwordPunch", 0.9f);
+
+				Invoke ("Enrage", 1.30f);
+			}
+		}
+
+		public override void UpdateLife(float newLife){
+			m_Lifebar_Slider.value = newLife / Start_Life;
 
 			if (newLife <= 0.0f) {
 				print ("WIN !");
 			}
 		}
 
-		public void Die(){
-			Destroy (m_Lifebar);
+		public override void Die(){
+			Destroy (m_Lifebar_Slider);
 		}
 	}
 }

@@ -288,8 +288,8 @@ GameObject:
   - 195: {fileID: 19574386}
   - 136: {fileID: 13628120}
   - 114: {fileID: 11439892}
-  - 114: {fileID: 11462138}
   - 82: {fileID: 8215374}
+  - 114: {fileID: 11437290}
   m_Layer: 0
   m_Name: AIArcherController
   m_TagString: Enemy
@@ -1044,7 +1044,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127024}
   m_LocalRotation: {x: 0, y: -0.637637, z: 0, w: 0.770337}
-  m_LocalPosition: {x: -9.4, y: 2.73, z: 40.1}
+  m_LocalPosition: {x: -18.147978, y: 2.7499998, z: -34.902325}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 491528}
@@ -1788,6 +1788,28 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11437290
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1161cebe2567b4636a46ab7ac8a967da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MovingTurnSpeed: 360
+  m_StationaryTurnSpeed: 180
+  m_JumpPower: 12
+  m_GravityMultiplier: 2
+  m_RunCycleLegOffset: 0.2
+  m_MoveSpeedMultiplier: 1
+  m_AnimSpeedMultiplier: 1
+  m_GroundCheckDistance: 0.1
+  magicWand: {fileID: 0}
+  m_Life: 1
+  arrow: {fileID: 140432}
 --- !u!114 &11439892
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1801,29 +1823,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   closeDistance: 7
---- !u!114 &11462138
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 127024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d4c8dc1cdce4b61aa585cb2ec70876, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MovingTurnSpeed: 360
-  m_StationaryTurnSpeed: 180
-  m_JumpPower: 12
-  m_GravityMultiplier: 2
-  m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 1
-  m_AnimSpeedMultiplier: 1
-  m_GroundCheckDistance: 0.1
-  projectile: {fileID: 140432}
-  magicWand: {fileID: 0}
-  attackType: stay-away
-  m_Life: 1
 --- !u!114 &11490008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2209,6 +2208,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Volume
       value: 0.074
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Life
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attackType
+      value: stay-away
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

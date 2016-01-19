@@ -348,9 +348,9 @@ GameObject:
   - 195: {fileID: 19574372}
   - 136: {fileID: 13666406}
   - 114: {fileID: 11436724}
-  - 114: {fileID: 11405728}
   - 136: {fileID: 13676638}
   - 82: {fileID: 8271684}
+  - 114: {fileID: 11407034}
   m_Layer: 0
   m_Name: AIGruntController
   m_TagString: Enemy
@@ -1490,7 +1490,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11405728
+--- !u!114 &11407034
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1498,7 +1498,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 140656}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d4c8dc1cdce4b61aa585cb2ec70876, type: 3}
+  m_Script: {fileID: 11500000, guid: d3527f6aea19f41d3a3d1c32bc2b76b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_MovingTurnSpeed: 360
@@ -1511,7 +1511,6 @@ MonoBehaviour:
   m_GroundCheckDistance: 0.1
   projectile: {fileID: 0}
   magicWand: {fileID: 0}
-  attackType: hand-to-hand
   m_Life: 1
 --- !u!114 &11436724
 MonoBehaviour:
@@ -1783,6 +1782,10 @@ Prefab:
       propertyPath: m_Avatar
       value: 
       objectReference: {fileID: 9000000, guid: b1c55926c00ed25418f0579fb9548682, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Life
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 140656}

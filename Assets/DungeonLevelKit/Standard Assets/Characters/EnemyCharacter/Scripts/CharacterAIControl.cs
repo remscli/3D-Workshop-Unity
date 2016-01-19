@@ -4,12 +4,12 @@ using UnityEngine;
 namespace UnityStandardAssets.Characters.Enemy
 {
     [RequireComponent(typeof (NavMeshAgent))]
-	[RequireComponent(typeof (EnemyCharacter))]
+	[RequireComponent(typeof (AEnemyCharacter))]
 
     public class CharacterAIControl : MonoBehaviour
     {
         public NavMeshAgent agent { get; private set; } // the navmesh agent required for the path finding
-		public EnemyCharacter character { get; private set; } // the character we are controlling
+		public AEnemyCharacter character { get; private set; } // the character we are controlling
 		public Transform target; // target to aim for
 		public float closeDistance = 4.6F;
 		bool shouldWalk;
@@ -19,7 +19,8 @@ namespace UnityStandardAssets.Characters.Enemy
         {
             // get the components on the object we need ( should not be null due to require component so no need to check )
 			agent = GetComponentInChildren<NavMeshAgent>();
-			character = GetComponent<EnemyCharacter>();
+			character = GetComponent<AEnemyCharacter>();
+
 			shouldWalk = false;
 			agent.Stop ();
 

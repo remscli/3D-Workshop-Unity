@@ -5,7 +5,7 @@ namespace UnityStandardAssets.Characters.Enemy
 	[RequireComponent(typeof(Rigidbody))]
 	[RequireComponent(typeof(CapsuleCollider))]
 	[RequireComponent(typeof(Animator))]
-	public class EnemyCharacter : MonoBehaviour
+	public abstract class AEnemyCharacter : MonoBehaviour
 	{
 		[SerializeField] float m_MovingTurnSpeed = 360;
 		[SerializeField] float m_StationaryTurnSpeed = 180;
@@ -17,12 +17,9 @@ namespace UnityStandardAssets.Characters.Enemy
 		[SerializeField] float m_GroundCheckDistance = 0.1f;
 
 		Rigidbody m_Rigidbody;
-		Animator m_Animator;
+		protected Animator m_Animator;
 		CharacterAIControl m_AIControl;
-		public GameObject projectile;
 		public GameObject magicWand;
-		KingEnemy King;
-		public string attackType;
 		bool m_IsGrounded = true;
 		float m_OrigGroundCheckDistance;
 		const float k_Half = 0.5f;
@@ -35,32 +32,27 @@ namespace UnityStandardAssets.Characters.Enemy
 		bool m_Crouching;
 		public float m_Life;
 		bool m_Enraged;
-		bool m_Fighting = false;
+		protected bool m_Fighting = false;
 		bool m_Hurting = false;
-		AudioSource attackSound;
+		protected AudioSource attackSound;
 
 
-		void Start()
+		protected virtual void Start()
 		{
 			m_Animator = GetComponent<Animator>();
 			m_Rigidbody = GetComponent<Rigidbody>();
 			m_Capsule = GetComponent<CapsuleCollider>();
 			m_AIControl = GetComponent<CharacterAIControl>();
-			King = GetComponent<KingEnemy> ();
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
 
 			attackSound = GetComponent<AudioSource>();
 
-			// Hide projectile model by default
-			if(projectile)
-				projectile.SetActive(false);
-
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
 		}
 
-		void Update(){
+		protected void Update(){
 			m_Animator.SetBool ("Hurt", m_Hurting);
 			m_Animator.SetBool ("Fight", m_Fighting);
 			m_Animator.SetBool ("Enraged", m_Enraged);
@@ -179,45 +171,17 @@ namespace UnityStandardAssets.Characters.Enemy
 			//}
 		}
 
-		public void Fight(){
-			//Debug.Log ("Fight");
-			if(!m_Fighting && m_Life > 0.0f){
-				//Debug.Log ("Fight");
-				m_Animator.SetFloat ("Forward", 0.0f);
+		public abstract void Fight ();
 
-				print ("ATTACK");
-
-				m_Fighting = true;
-
-				if (projectile) {
-					Invoke ("SendProjectile", 0.75f);
-				} else if (magicWand) {
-					Invoke ("SendParticles", 0.75f);
-				} else {
-					Invoke ("SendSwordPunch", 0.2f);
-				}
-
-				Invoke ("Enrage", 1.30f);
-			}
+		public virtual void UpdateLife (float newLife){
+			print ("UPDATE LIFE");
 		}
+
+		public virtual void Die (){}
 
 		void SendSwordPunch(){
 			if(!attackSound.isPlaying)
 				attackSound.Play ();
-		}
-
-		void SendProjectile(){
-			print ("SEND PROJECTILE");
-			attackSound.Play ();
-			GameObject newProjectile;
-			newProjectile = Instantiate (projectile, projectile.transform.position, projectile.transform.rotation) as GameObject;
-			newProjectile.SetActive (true);
-		}
-
-		void SendParticles(){
-			print ("SEND PARTICULES");
-			attackSound.Play ();
-			magicWand.GetComponent<EnemyMagicWand>().Play ();
 		}
 
 		void Enrage(){
@@ -247,14 +211,13 @@ namespace UnityStandardAssets.Characters.Enemy
 			m_Life = m_Life - damages;
 			m_Animator.SetFloat("Life", m_Life);
 
-
-			if (gameObject.name == "AIKingController")
-				King.UpdateLife (m_Life);
+			UpdateLife (m_Life);
 
 			if (m_Life > 0.0f) {
 				m_Hurting = true;
 
 				Invoke ("HurtEnd", 1.40f);
+
 			} else {
 				NavMeshAgent agent = GetComponent<NavMeshAgent>();
 
@@ -266,8 +229,7 @@ namespace UnityStandardAssets.Characters.Enemy
 				agent.Stop ();
 				agent.enabled = false;
 
-				if (gameObject.name == "AIKingController")
-					King.Die ();
+				Die ();
 				
 				Invoke ("Destroy", 10.0f);
 			}

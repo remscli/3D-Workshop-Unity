@@ -5,7 +5,7 @@ using UnityStandardAssets.Characters.Enemy;
 namespace UnityStandardAssets.Characters.ThirdPerson {
 	public class ThirdPersonSword : MonoBehaviour {
 
-		EnemyCharacter enemyCharacter;
+		AEnemyCharacter enemyCharacter;
 		GameObject enemy;
 
 		// Use this for initialization
@@ -44,7 +44,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson {
 
 		void KillEnemy(){
 			print ("killed");
-			enemyCharacter = enemy.GetComponent<EnemyCharacter>();
+			enemyCharacter = enemy.GetComponent<AEnemyCharacter>();
 			enemyCharacter.Hurt(1.0f);
 		}
 
