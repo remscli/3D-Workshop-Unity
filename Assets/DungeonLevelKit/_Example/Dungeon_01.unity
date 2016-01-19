@@ -59776,6 +59776,23 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 424698, guid: f2e4eaa1964384fbaaf13dfca34a59cc, type: 2}
   m_PrefabInternal: {fileID: 1670222748}
+--- !u!1 &1673470474 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 127676, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
+  m_PrefabInternal: {fileID: 1628913395}
+--- !u!114 &1673470481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1673470474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 723ac35677ac440299f6a3c473d02d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shake_decay: 0
+  shake_intensity: 0
 --- !u!1001 &1674923048
 Prefab:
   m_ObjectHideFlags: 0
@@ -62588,8 +62605,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.4602932, y: 0.9999998, z: 1}
+  m_Center: {x: 0.0015022631, y: 0, z: 0.0000000142187195}
 --- !u!33 &1818514204
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -62719,7 +62736,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5

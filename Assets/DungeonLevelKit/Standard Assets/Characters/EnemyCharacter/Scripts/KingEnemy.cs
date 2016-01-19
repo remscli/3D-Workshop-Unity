@@ -8,18 +8,18 @@ namespace UnityStandardAssets.Characters.Enemy
 		
 		public Slider m_Lifebar_Slider;
 		float Start_Life;
+		CameraShake cameraShake;
 
 		// Use this for initialization
 		protected override void Start () {
 			base.Start();
+			cameraShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
 
 			Start_Life = m_Life;
 		}
 
 		public override void Fight(){
-			//Debug.Log ("Fight");
 			if(!m_Fighting && m_Life > 0.0f){
-				//Debug.Log ("Fight");
 				m_Animator.SetFloat ("Forward", 0.0f);
 
 				print ("ATTACK");
@@ -28,8 +28,14 @@ namespace UnityStandardAssets.Characters.Enemy
 
 				Invoke ("SendSwordPunch", 0.9f);
 
+				Invoke ("ShakeCamera", 0.9f);
+
 				Invoke ("Enrage", 1.30f);
 			}
+		}
+
+		void ShakeCamera(){
+			cameraShake.Shake();
 		}
 
 		public override void UpdateLife(float newLife){
@@ -41,7 +47,7 @@ namespace UnityStandardAssets.Characters.Enemy
 		}
 
 		public override void Die(){
-			Destroy (m_Lifebar_Slider);
+			Destroy (m_Lifebar_Slider.gameObject.transform.parent.gameObject);
 		}
 	}
 }
