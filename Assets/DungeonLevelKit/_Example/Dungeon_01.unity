@@ -37213,6 +37213,10 @@ Prefab:
       propertyPath: m_Lifebar_Slider
       value: 
       objectReference: {fileID: 1695964165}
+    - target: {fileID: 11480122, guid: 51e7a297bc9aa466c8624b7c8ce27200, type: 2}
+      propertyPath: m_Life
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11462414, guid: 51e7a297bc9aa466c8624b7c8ce27200, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 51e7a297bc9aa466c8624b7c8ce27200, type: 2}
@@ -59112,19 +59116,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 496262, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.53267515
+      value: 0.5326752
       objectReference: {fileID: 0}
     - target: {fileID: 496262, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.07034045
+      value: 0.070340455
       objectReference: {fileID: 0}
     - target: {fileID: 496262, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.83613265
+      value: 0.83613276
       objectReference: {fileID: 0}
     - target: {fileID: 496262, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.11041513
+      value: -0.110415146
       objectReference: {fileID: 0}
     - target: {fileID: 13717142, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
       propertyPath: m_Materials.Array.data[0]
