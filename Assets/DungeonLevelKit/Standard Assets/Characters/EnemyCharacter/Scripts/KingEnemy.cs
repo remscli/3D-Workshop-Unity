@@ -24,6 +24,10 @@ namespace UnityStandardAssets.Characters.Enemy
 
 		public void UpdateLife(float newLife){
 			m_Lifebar_Slider.value = newLife / m_Life;
+
+			if (newLife <= 0.0f) {
+				print ("WIN !");
+			}
 		}
 
 		public void Die(){
