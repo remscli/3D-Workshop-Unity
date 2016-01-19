@@ -22,6 +22,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		Animator m_Animator;
 		GameObject m_Lifebar; 
 		Slider m_Lifebar_Slider;
+		GameObject m_ReplayButton;
+		GameObject m_EndText;
 		public ThirdPersonSword sword;
 		bool m_IsGrounded;
 		float m_OrigGroundCheckDistance;
@@ -46,6 +48,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Capsule = GetComponent<CapsuleCollider>();
 			m_Lifebar =  GameObject.Find("Lifebar");
 			m_Lifebar_Slider = m_Lifebar.GetComponent<Slider> ();
+			m_ReplayButton = GameObject.Find ("ReplayButton");
+			m_ReplayButton.SetActive(false);
+			m_EndText = GameObject.Find ("EndText");
+
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
 
@@ -282,7 +288,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 				Invoke ("HurtEnd", 1.40f);
 			} else {
-				print ("GAME OVER !");
+				GameEnd ("fail");
 			}
 		}
 
@@ -313,6 +319,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		{
 			print ("COLLISION : " + other.transform.parent.gameObject.GetComponent<EnemyMagicWand>().damages);
 			Hurt (other.transform.parent.gameObject.GetComponent<EnemyMagicWand>().damages);
+		}
+
+		public void GameEnd(string state){
+			m_ReplayButton.SetActive(true);
+
+			Text EndTextText = m_EndText.GetComponent<Text> ();
+
+			if (state == "success")
+				EndTextText.text = "Bien joué !";
+			else 
+				EndTextText.text = "C'est raté pour cette fois !";
+
+			EndTextText.enabled = true;
 		}
 	}
 }

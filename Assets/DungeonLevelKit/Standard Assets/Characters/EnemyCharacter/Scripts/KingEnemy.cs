@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 namespace UnityStandardAssets.Characters.Enemy
 {
@@ -48,6 +49,8 @@ namespace UnityStandardAssets.Characters.Enemy
 
 		public override void Die(){
 			Destroy (m_Lifebar_Slider.gameObject.transform.parent.gameObject);
+			Debug.Log (GameObject.Find ("ThirdPersonCharacter"));
+			GameObject.Find ("ThirdPersonController").GetComponent<ThirdPersonCharacter> ().GameEnd ("success");
 		}
 	}
 }
